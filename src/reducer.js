@@ -1,3 +1,6 @@
+import {INCREASE,DECREASE,CLEAR_CART, REMOVE} from './action' ;
+ 
+ 
  function reducer(state,action){
 
    console.log("make it happen in reducer")
@@ -26,6 +29,30 @@
   if(action.type==="CHANGE_NAME"){
     return{...state,name:"santa"}
   }
+  if(action.type===CLEAR_CART){
+    return{...state,cart:state.cart=[]}
+  }
+  if(action.type===DECREASE){
+    console.log("you decrease ")
+  }
+  if(action.type===INCREASE){
+    console.log("you oncrease")
+  }
+  if(action.type===REMOVE){
+    console.log("you remove amount")
+    console.log(action.payload.id)
+    return{...state,
+    cart:state.cart.filter((c)=>action.payload.id!==c.id)}
+  }
+  // using switch case
+  // switch(action.type) {
+  //   case CLEAR_CART:
+  //     return{...state,cart:state.cart=[]}
+  //     default:
+  //       return state
+    
+
+  // }
   
   // return state // by default we should always return the old state
   //return "shake and bake" // we can return anything from the reducer , but functinality may change

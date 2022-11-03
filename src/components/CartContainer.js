@@ -1,7 +1,12 @@
 import React from "react";
 import CartItem from "./CartItem";
-import {connect} from"redux";
-const CartContainer = ({ cart = [] }) => {
+import {connect} from "react-redux";
+
+import { CLEAR_CART } from "../action";
+
+// const CartContainer = ({ cart = [] }) => {
+  // cart should an empty array otherwise it would have given an error
+const CartContainer =({cart=[],total,dispatch})=>{
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -30,13 +35,22 @@ const CartContainer = ({ cart = [] }) => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>$0.00</span>
+            {/* total <span>$0.00</span> */}
+            total <span>${total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button className="btn clear-btn"
+         onClick={()=>{dispatch({type:CLEAR_CART})}}>clear cart</button>
       </footer>
     </section>
   );
 };
+function mapStateToProps(store){ // can be called store also
+  // return{cart:store.cart,total:store.total}
+  // using destructuring by es6 
+  const {cart, total} = store // store also include dispatch function
+  return{cart,total}
 
-export default CartContainer;
+}
+
+export default connect(mapStateToProps)(CartContainer);

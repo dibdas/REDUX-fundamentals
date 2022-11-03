@@ -1,6 +1,9 @@
 import React from "react";
 
-const CartItem = ({ img, title, price, amount }) => {
+import { INCREASE,DECREASE,REMOVE } from "../action";
+import {connect} from "react-redux";
+
+const CartItem = ({ img, title, price, amount , remove}) => {
   return (
     <div className="cart-item">
       <img src={img} alt={title} />
@@ -8,7 +11,11 @@ const CartItem = ({ img, title, price, amount }) => {
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
         {/* remove button */}
-        <button className="remove-btn">remove</button>
+         {/* invoking the remove function rigt away without the arraow function */}
+        {/* <button className="remove-btn" onClick={remove}>remove</button> */}
+        
+        {/* invoking the remove function after the arraow function not invoking directly */}
+        <button className="remove-btn" onClick={()=>remove()}>remove</button>
       </div>
       <div>
         {/* increase amount */}
@@ -30,4 +37,26 @@ const CartItem = ({ img, title, price, amount }) => {
   );
 };
 
-export default CartItem;
+// export default CartItem;
+const mapDispatchToProps=(dispatch,ownProps)=>{
+  //return {remove:dispatch({type:REMOVE})} // its getting inviked before the user clicks
+  // return {remove:()=> dispatch({type:REMOVE})} // for when user clicks on button ist get invoked right way
+
+  // return {remove:()=> dispatch({type:REMOVE,id:1})} // in the reducer I will get id is 1 as i is hard coded
+
+  console.log(ownProps) // for each and every cart Item , there is the unique value here , getting all values which are there in the cart Item values
+  // ownProps giving us all the values which are there in props 
+
+  const {id} = ownProps
+  //  return {remove:()=>dispatch({type:REMOVE, payload:{id:id}})} without using e6 property 
+  // OR
+  return {remove:()=>dispatch({type:REMOVE, payload:{id}})} // using es6 as using the same name
+
+
+}
+// here we dont need pass mapstateToProps , because props are already being passed so only
+// mapDispatchToprops is being passed thats why the first argument is null
+// connect has two arguments , first is mapStateToProps, second is mapDispatchToprops
+// as first argument is not there so ot s null
+
+export default  connect(null,mapDispatchToProps)(CartItem)

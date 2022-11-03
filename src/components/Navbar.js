@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // Connect is higher order component , it means it returns a component itself
 // const Navbar = ({cart}) => {
-const Navbar=({am})=>{
+const Navbar=({amount})=>{
   // const {count} = cart
   return (
     <nav>
@@ -15,7 +15,7 @@ const Navbar=({am})=>{
           </svg>
           <div className="amount-container">
             {/* <p className="total-amount">{count}</p> */}
-            <p className="total-amount">{am}</p>
+            <p className="total-amount">{amount}</p>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ const Navbar=({am})=>{
 
 
   // mapping the store to the props of the Navbar component
-  const mapStateToProps=(state)=>{
+  const mapStateToProps=(state)=>{ // only state or store should be use as the arguments
     console.log(state)
     // mapStateToProps() in Connect(Navbar) must return a plain object. Instead received undefined.
     // return {am:state.amount} // setting up the prop name and value want to the prop, any name can be given to prop

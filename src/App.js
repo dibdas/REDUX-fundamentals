@@ -42,7 +42,7 @@ console.log(createStore)
 const  defaultstore ={
   // amount: 0,
   amount:5,
-  total:200,
+  total:210,
   cart:cartItems}
 
 // setting action as variables
