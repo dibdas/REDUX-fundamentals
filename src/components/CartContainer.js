@@ -1,5 +1,6 @@
 import React from "react";
 import CartItem from "./CartItem";
+import {connect} from"redux";
 const CartContainer = ({ cart = [] }) => {
   if (cart.length === 0) {
     return (
